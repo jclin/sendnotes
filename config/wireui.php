@@ -18,7 +18,7 @@ return [
     |
      */
 
-    'prefix' => null,
+    'prefix' => 'wireui-',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ return [
 
     'dialog' => Config::dialog(),
 
-    'dropdown' => array_merge(Config::dropdown(), ['alias' => 'wui-dropdown']),
+    'dropdown' => Config::dropdown(),
 
     'icon' => Config::icon(),
 
