@@ -13,6 +13,29 @@ new class extends Component {
 
 <div>
   <div class="space-y-2">
+    @if ($notes->isEmpty())
+      <div class="text-center">
+        <p class="text-xl font-bold">No notes yet</p>
+        <p class="text-sm">Let's create your first note to send.</p>
+        <x-wireui-button
+          right-icon="plus"
+          primary
+          class="mt-6"
+          href="{{ route('notes.create') }}"
+          wire:navigate
+        >Create
+          note</x-wireui-button>
+      </div>
+    @else
+      <x-wireui-button
+        right-icon="plus"
+        primary
+        class="mb-12"
+        href="{{ route('notes.create') }}"
+        wire:navigate
+      >Create
+        note</x-wireui-button>
+
       <div class="mt-12 grid grid-cols-2 gap-4">
         @foreach ($notes as $note)
           <x-wireui-card wire:key='{{ $note->id }}'>
@@ -46,5 +69,6 @@ new class extends Component {
           </x-wireui-card>
         @endforeach
       </div>
+    @endif
   </div>
 </div>
