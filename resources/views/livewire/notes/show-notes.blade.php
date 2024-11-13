@@ -1,8 +1,16 @@
 <?php
 
+use App\Models\Note;
 use Livewire\Volt\Component;
 
 new class extends Component {
+    public function delete($noteId)
+    {
+        $note = Note::where('id', $noteId)->first();
+        $this->authorize('delete', $note);
+        $note->delete();
+    }
+
     public function with(): array
     {
         return [
@@ -63,6 +71,7 @@ new class extends Component {
                   flat
                   secondary
                   icon="trash"
+                  wire:click="delete('{{ $note->id }}')"
                 />
               </div>
             </div>
