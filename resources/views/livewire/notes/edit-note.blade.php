@@ -72,6 +72,7 @@ new class extends Component {
         placeholder="MM/DD/YYYY"
         without-time
         without-timezone
+        icon="calendar"
       />
       <x-wireui-checkbox label="Note Published" wire:model="noteIsPublished" />
       <div class="flex justify-between pt-4">
