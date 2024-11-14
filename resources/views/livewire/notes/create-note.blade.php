@@ -25,7 +25,7 @@ new class extends Component {
                 'body' => $this->noteBody,
                 'recipient' => $this->noteRecipient,
                 'send_date' => $this->noteSendDate,
-                'is_published' => false,
+                'is_published' => true,
             ]);
 
         redirect(route('notes.index'));
@@ -51,17 +51,18 @@ new class extends Component {
       placeholder="yourfriend@email.com"
       icon="user"
     />
-    <x-wireui-input
+    <x-wireui-datetime-picker
       wire:model="noteSendDate"
-      type="date"
       label="Send Date"
-      icon="calendar"
+      placeholder="MM/DD/YYYY"
+      without-time
+      without-timezone
     />
     <div class="pt-4">
       <x-wireui-button
         primary
         spinner
-        wire:click="submit"
+        type="submit"
         right-icon="calendar"
       >Schedule Note</x-wireui-button>
     </div>

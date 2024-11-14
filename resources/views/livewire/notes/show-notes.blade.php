@@ -44,13 +44,20 @@ new class extends Component {
       >Create
         note</x-wireui-button>
 
-      <div class="mt-12 grid grid-cols-2 gap-4">
+      <div class="mt-12 grid grid-cols-3 gap-4">
         @foreach ($notes as $note)
           <x-wireui-card wire:key='{{ $note->id }}'>
             <div class="flex justify-between">
-              <a href="#" class="text-xl font-bold hover:text-blue-500 hover:underline">
-                {{ $note->title }}
-              </a>
+              <div>
+                <a
+                  href="{{ route('notes.edit', ['noteId' => $note->id]) }}"
+                  wire:navigate
+                  class="text-xl font-bold hover:text-blue-500 hover:underline"
+                >
+                  {{ $note->title }}
+                </a>
+                <p class="mt-2 text-sm">{{ Str::limit($note->body, 50) }}</p>
+              </div>
               <div class="text-xs text-gray-500">{{ $note->send_date->format('d/m/Y') }}</div>
             </div>
             <div class="mt-4 flex items-end justify-between space-x-1">

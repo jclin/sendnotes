@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -19,5 +20,11 @@ Route::view('notes', 'notes.index')
 Route::view('notes/create', 'notes.create')
     ->middleware(['auth'])
     ->name('notes.create');
+
+Route::get('notes/{noteId}/edit', function ($noteId) {
+    return view("notes.edit", ["noteId" => $noteId]);
+})
+    ->middleware(['auth'])
+    ->name('notes.edit');
 
 require __DIR__ . '/auth.php';

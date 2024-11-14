@@ -14,7 +14,11 @@ class Note extends Model
     protected $guarded = ['id'];
 
     // protected $dates = ['send_date'];
-    protected $casts = ['send_date' => 'date'];
+    protected $casts = [
+        'recipient' => 'string',
+        'send_date' => 'date',
+        'is_published' => 'boolean'
+    ];
 
     public function user(): BelongsTo
     {
