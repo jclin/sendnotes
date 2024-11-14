@@ -62,13 +62,17 @@ new class extends Component {
           <x-wireui-card wire:key='{{ $note->id }}'>
             <div class="flex justify-between">
               <div>
-                <a
-                  href="{{ route('notes.edit', ['noteId' => $note->id]) }}"
-                  wire:navigate
-                  class="text-xl font-bold hover:text-blue-500 hover:underline"
-                >
-                  {{ $note->title }}
-                </a>
+                @can('update', $note)
+                  <a
+                    href="{{ route('notes.edit', ['noteId' => $note->id]) }}"
+                    wire:navigate
+                    class="text-xl font-bold hover:text-blue-500 hover:underline"
+                  >
+                    {{ $note->title }}
+                  </a>
+                @else
+                  <p class="text-xl font-bold text-gray-500">{{ $note->title }}</p>
+                @endcan
                 <p class="mt-2 text-sm">{{ Str::limit($note->body, 50) }}</p>
               </div>
               <div class="text-xs text-gray-500">{{ $note->send_date->format('m/d/Y') }}</div>
@@ -83,6 +87,7 @@ new class extends Component {
                   flat
                   secondary
                   icon="eye"
+                  href="{{ route('notes.view', $note->id) }}"
                 />
                 <x-wireui-mini-button
                   size="xs"

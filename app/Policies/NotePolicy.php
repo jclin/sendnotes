@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Carbon;
 
 class NotePolicy
 {
@@ -37,7 +38,8 @@ class NotePolicy
      */
     public function update(User $user, Note $note): bool
     {
-        return $user->id === $note->user_id;
+        $notExpired = $note->send_date->isToday() || $note->send_date->isFuture();
+        return $user->id === $note->user_id && $notExpired;
     }
 
     /**
