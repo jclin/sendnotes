@@ -1,6 +1,6 @@
 <?php
 
-use Livewire\Volt\Volt;
+use App\Models\Note;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -26,5 +26,14 @@ Route::get('notes/{noteId}/edit', function ($noteId) {
 })
     ->middleware(['auth'])
     ->name('notes.edit');
+
+Route::get('notes/{noteId}', function ($noteId) {
+    $note = Note::findOrFail($noteId);
+    if (!$note->is_published) {
+        abort(404, "Note not found.");
+    }
+
+    return view('notes.view', ["note" => $note]);
+})->name("notes.view");
 
 require __DIR__ . '/auth.php';
