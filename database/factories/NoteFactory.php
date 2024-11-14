@@ -22,7 +22,8 @@ class NoteFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'body' => $this->faker->sentences(1, true),
-            'is_published' => false,
+            'recipient' => $this->faker->email(),
+            'is_published' => true,
             'heart_count' => 0,
             'send_date' => now()->addDays($this->faker->numberBetween(1, 30)),
         ];
